@@ -29,6 +29,10 @@ jobs:
               ${{ secrets.GRADLE_VERSION }}
       - name: Add updated files to stage
         run: git add --all
+      - name: Set mail
+        run: git config --global user.email "purwarpranav80@gmail.com"
+      - name: Set Name
+        run: git config --global user.name "Gradle Wrapper"
 
       - name: Commit latest gradle wrapper
         run: git commit -m "Update gradle wrapper to v${{ secrets.GRADLE_VERSION }}"
