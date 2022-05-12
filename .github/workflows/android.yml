@@ -7,8 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-
+  build-apk:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,9 +25,8 @@ jobs:
       - name: Build with gradle
         uses: gradle/gradle-build-action@v2.1.5
         with:
-          arguments: |
-              assembleDebug
-              --stacktrace
+          arguments: assembleDebug
+          arguments: --stacktrace
 
       - name: Upload debug apk
         uses: actions/upload-artifact@v3
