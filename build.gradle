@@ -4,11 +4,14 @@ buildscript {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.0-alpha09'
         classpath 'com.google.gms:google-services:4.3.10'
-        classpath 'io.fabric.sdk.android:fabric:1.4.8'
+        classpath 'io.fabric.tools:gradle:1.25.4'
     }
 }
 
