@@ -2,32 +2,24 @@ name: Android CI
 
 on:
   push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-        uses: actions/checkout@v3.0.2
+    - uses: actions/checkout@v3
+    - name: set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3.3.0
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Give permission to executable
-        run: chmod +x gradlew
-
-      - name: Build with gradle
-        uses: gradle/gradle-build-action@v2.1.5
-        with:
-          arguments: assembleDebug
-          arguments: --stacktrace
-
-      - name: Upload debug apk
-        uses: actions/upload-artifact@v3
-        if: ${{ !github.head_ref }}
-        with:
-          name: apk-debug
-          path: app/build/outputs/apk/debug
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug --stacktrace
